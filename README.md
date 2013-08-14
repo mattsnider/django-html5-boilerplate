@@ -1,8 +1,8 @@
-I really like using HTML5 boilerplate as the basis for all my websites, including my Django projects. In the past, I have included it as part of other projects, but find myself repeating the same steps for each new project. The Django HTML5 Boilerplate (DH5BP) project addresses this issue by incorporating the HTML5 Boilerplate (H5BP) project into an easy to consume Django-friendly python package.
+I really like using HTML5 boilerplate as the basis for all my websites, including my Django projects. In the past, I have included it as part of other projects, but find myself repeating the same steps for each new project. The Django HTML5 Boilerplate (DH5BP) project addresses this issue by incorporating the HTML5 Boilerplate (H5BP) project into an easy to consume Django-friendly Python package.
 
 Find out for about HTML5 Boilerplate at https://github.com/h5bp/html5-boilerplate
 
-This project differentiates itself from other H5BP to django ports, by including Fabric scripts that automatically convert new versions of H5BP into a Django-friendly python module. Ideally, this will make keeping up-to-date with the latest version of H5BP trivial.
+This project differentiates itself from other H5BP to Django ports, by including Fabric scripts that automatically convert new versions of H5BP into a Django-friendly Python module. Ideally, this will make keeping up-to-date with the latest version of H5BP trivial.
 
 Installation
 ============
@@ -22,12 +22,28 @@ To consume the package, you need only have a version of Django >= 1.3. This is t
 
 To update the repository with the latest H5BP using the Fabric script, you will also need to install Fabric. I use Fabric >= 1.7, but the script is still very simple, so it will probably work on Fabric >= 1.0.
 
-This library has been tested on python >= 2.6.
+This library has been tested on Python >= 2.6.
 
 Usage
 =====
 
-All static files and templates are namespaced under the directory DH5BP.
+All static files and templates are namespaced under the directory DH5BP. You will need to include DH5BP in your `settings.py`:
+
+    INSTALLED_APPS = (
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        # Uncomment the next line to enable the admin:
+        'django.contrib.admin',
+        # Uncomment the next line to enable admin documentation:
+        'django.contrib.admindocs',
+        ...
+        'dh5bp',
+        ...
+    )
 
 H5BP Template
 -------------
