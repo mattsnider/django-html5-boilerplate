@@ -1,0 +1,21 @@
+# OS files
+*~
+.DS_Store
+
+# IDE files
+.idea
+*.iml
+
+# python files
+*.pyc
+*.coverage
+
+# build files
+*.egg
+*.egg-info/
+MANIFEST
+dist/
+build/
+
+# html5 boilerplate source files
+html5-boilerplate/
