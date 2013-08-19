@@ -56,7 +56,7 @@ Any template you want to inherit the H5BP page architecture include the followin
 
 Additionally, you can define more styles, meta, and other head-related markup in the title block:
 
-    {% block title %}
+    {% block head %}
         <link rel="stylesheet" href="{% static "css/YOUR_CSS.css" %}">
         <meta name="keywords" content="YOUR KEYWORD">
         ...
