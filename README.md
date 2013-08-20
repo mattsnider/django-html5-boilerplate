@@ -83,6 +83,8 @@ If the enduser is viewing your site on a version of IE <= 7, then they will be s
         <p class="browsehappy">YOUR MESSAGE</p>
     {% endblock %}
 
+In version 1.0.3 two new template variables were added `html_attr` and `body_attr` so you can add attributes to those html elements (such as `id` to the body tag and `manifest` to html tag). You need to provide these arguments as strings to the template.
+
 If you use Google Analytics (GA), then H5BP includes the script for it right into the page. You will need to provide the template variable `DH5BP_GA_CODE` with your GA code to activate the script. You will probably want to use a context_processor for this:
 
 > https://docs.djangoproject.com/en/dev/ref/templates/api/#writing-your-own-context-processors

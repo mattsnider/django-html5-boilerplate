@@ -1,4 +1,6 @@
-v1.0.2, 8/20/2013 -- Icons updated again and adding a new block `html_tag` in base.html, so you can add things like a manifest file.
+v1.0.3, 8/20/2013 -- The `html_tag` solution does not work, so moving to a template variable {{ html_attr }}. Also adding the {{ body_attr }} template variable.
+
+v1.0.2, 8/20/2013 -- DON'T USE THIS VERSION (`html_tag` BUGGED). Icons updated again and adding a new block `html_tag` in base.html, so you can add things like a manifest file.
 
 v1.0.1, 8/15/2013 -- Incorporating commit cd981e52f7cb96260f9703002885db154a10ebfb, updating the apple icons.
 
