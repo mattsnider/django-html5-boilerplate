@@ -114,7 +114,7 @@ def migrateHtml():
         text = text.replace(
             '<script src="{% static "js/dh5bp/main.js" %}"></script>',
             '{% block pre_main_script %}{% endblock %}\n'
-            '        <script src="{% static "js/main.js" %}"></script>\n'
+            '        <script src="{% if main_js %}{% static main_js %}{% else %}{% static "js/main.js" %}{% endif %}"></script>\n'
             '        {% block post_main_script %}{% endblock %}')
 
     with open(basePathDest, 'w') as f:

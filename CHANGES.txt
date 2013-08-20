@@ -1,3 +1,8 @@
+v1.0.4, 8/20/2013 --
+Making `html_attr` and `body_attr` safe, so they render with &quot;.
+Cleaning up the fabfile, so you can specify whether to purge the h5bp repo or not.
+Allowing consumer to define a new name for "main.js" using `main_js` template variable.
+
 v1.0.3, 8/20/2013 -- The `html_tag` solution does not work, so moving to a template variable {{ html_attr }}. Also adding the {{ body_attr }} template variable.
 
 v1.0.2, 8/20/2013 -- DON'T USE THIS VERSION (`html_tag` BUGGED). Icons updated again and adding a new block `html_tag` in base.html, so you can add things like a manifest file.
