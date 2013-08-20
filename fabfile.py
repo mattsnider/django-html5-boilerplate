@@ -10,20 +10,25 @@ def cleanPackage():
     local('rm -rf dh5bp/templates')
 
 
-def cleanup():
+def cleanup_h5bp():
     """
     Remove the fetched H5BP.
     """
     local('rm -rf html5-boilerplate')
 
 
-def getLatestH5BP():
+def getLatestH5BP(cleanup=True):
     """
     Fetch the latest H5BP.
     """
-    if os.path.exists('./html5-boilerplate'):
-        cleanup()
-    local('git clone https://github.com/h5bp/html5-boilerplate.git')
+    path_exists = os.path.exists('./html5-boilerplate')
+
+    if cleanup and path_exists:
+        cleanup_h5bp()
+        path_exists = False
+
+    if not path_exists:
+        local('git clone https://github.com/h5bp/html5-boilerplate.git')
 
 
 def migrateHtml():
@@ -72,9 +77,9 @@ def migrateHtml():
 
         # add a attribute template variables to the HTML and BODY tag
         text = text.replace(
-            '<html class', '<html {{ html_attr }} class')
+            '<html class', '<html {{ html_attr|safe }} class')
         text = text.replace(
-            '<body>', '<body {{ body_attr }}>')
+            '<body>', '<body {{ body_attr|safe }}>')
 
         # update the head block (title, meta, additional scripts)
         text = text.replace(
@@ -147,13 +152,15 @@ def moveStatic():
         os.path.join('html5-boilerplate', '*.ico'), imgPathDest))
 
 
-def update(purge=False):
+def update(purge=False, cleanup=True):
     """
     Run everything.
+    Use "fab update:cleanup=" for setting cleanup to False
     """
     if purge:
         cleanPackage()
-    getLatestH5BP()
+    getLatestH5BP(cleanup)
     moveStatic()
     migrateHtml()
-    cleanup()
+    if cleanup:
+        cleanup_h5bp()
