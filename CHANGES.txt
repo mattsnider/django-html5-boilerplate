@@ -1,3 +1,5 @@
+v1.0.2, 8/20/2013 -- Icons updated again and adding a new block `html_tag` in base.html, so you can add things like a manifest file.
+
 v1.0.1, 8/15/2013 -- Incorporating commit cd981e52f7cb96260f9703002885db154a10ebfb, updating the apple icons.
 
 v1.0.0, 8/13/2013 -- Initial release.

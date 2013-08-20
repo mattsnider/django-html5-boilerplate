@@ -70,6 +70,10 @@ def migrateHtml():
         text = text.replace(
             '<!DOCTYPE html>', '{% load staticfiles %}<!DOCTYPE html>')
 
+        # add a block to the HTML tag
+        text = text.replace(
+            '<html class', '<html {% block html_tag %}{% endblock %} class')
+
         # update the head block (title, meta, additional scripts)
         text = text.replace(
             '<title></title>', '<title>{% block title %}{% endblock %}</title>')
