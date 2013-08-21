@@ -75,6 +75,9 @@ def migrateHtml():
         text = text.replace(
             '<!DOCTYPE html>', '{% load staticfiles %}<!DOCTYPE html>')
 
+        # remove non-conditional HTML comments
+        text = re.sub('<!--(?!\[|>|<).+-->', '', text)
+
         # add a attribute template variables to the HTML and BODY tag
         text = text.replace(
             '<html class', '<html {{ html_attr|safe }} class')
