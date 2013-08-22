@@ -51,6 +51,15 @@ Any template you want to inherit the H5BP page architecture include the followin
 
     {% extends 'dh5bp/base.html' %}
     {% load url from future %}
+    {% load staticfiles %}
+    {% block title %}YOUR TITLE HERE{% endblock %}
+    {% block content %}YOUR PAGE MARKUP HERE{% endblock %}
+
+If added a second template that puts all the JavaScript includes in the `head` tag. I don't recommend using this, unless you are using a mobile library like jQuery Mobile, which expects to be loaded before the body.
+
+    {% extends 'dh5bp/base_script_in_head.html' %}
+    {% load url from future %}
+    {% load staticfiles %}
     {% block title %}YOUR TITLE HERE{% endblock %}
     {% block content %}YOUR PAGE MARKUP HERE{% endblock %}
 
@@ -83,7 +92,7 @@ If the enduser is viewing your site on a version of IE <= 7, then they will be s
         <p class="browsehappy">YOUR MESSAGE</p>
     {% endblock %}
 
-In version 1.0.3 two new template variables were added `html_attr` and `body_attr` so you can add attributes to those html elements (such as `id` to the body tag and `manifest` to html tag). You need to provide these arguments as strings to the template.
+In v1.0.3+, there are two new template variables `html_attr` and `body_attr`, which can be used to add attributes to those html elements (such as `id` to the `body` tag and `manifest` to `html` tag). These variables should be provided as strings to the template.
 
 If you use Google Analytics (GA), then H5BP includes the script for it right into the page. You will need to provide the template variable `DH5BP_GA_CODE` with your GA code to activate the script. You will probably want to use a context_processor for this:
 
@@ -91,7 +100,9 @@ If you use Google Analytics (GA), then H5BP includes the script for it right int
 
 JavaScript
 ----------
-You will be provided the latest `jQuery`, `modernizr`, and a `console` polyfill from H5BP. In addition, the base template will look for a static file `js/main.js`. Put any JavaScript that is required for all pages of your site here. I have created two blocks (as described above), where you can put JavaScript that needs to be execute before and after the main script.
+You will be provided the latest `jQuery`, `modernizr`, and a `console` polyfill from H5BP. In addition, the base template will look for a static file `js/main.js`. Put any JavaScript that is required for all pages of your site in `js/main.js`. I have created two blocks (as described above), where you can put JavaScript that needs to be execute before and after the main script.
+
+If you want to use a different file name, instead of `js/main.js`, then provided the template variable `main_js` with the relative path to your JavaScript file from `STATIC_ROOT`. This variable should be provided as strings to the template.
 
 Urls & Views
 ------------
