@@ -1,3 +1,7 @@
+v1.0.5, 8/21/2013 --
+Cleaning up fabfile, using more variables, so named blocks and template variables are easy to identify
+Adding a second base.html ('base_script_in_head.html') that moves the script blocks to head for use with mobile libraries like jQuery
+
 v1.0.4, 8/20/2013 --
 Making `html_attr` and `body_attr` safe, so they render with &quot;.
 Cleaning up the fabfile, so you can specify whether to purge the h5bp repo or not.
