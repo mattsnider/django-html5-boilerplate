@@ -1,3 +1,5 @@
+v1.0.6, 9/18/2013 -- updating to latest changes of h5bp (nothing major)
+
 v1.0.5, 8/21/2013 --
 Cleaning up fabfile, using more variables, so named blocks and template variables are easy to identify
 Adding a second base.html ('base_script_in_head.html') that moves the script blocks to head for use with mobile libraries like jQuery
