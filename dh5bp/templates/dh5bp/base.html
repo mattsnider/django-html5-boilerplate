@@ -9,10 +9,14 @@
         <title>{% block title %}{% endblock %}</title>
         <meta name="description" content="{% block description %}{% endblock %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
+        {% block normalizations %}
         <link rel="stylesheet" href="{% static "css/dh5bp/normalize.css" %}">
         <link rel="stylesheet" href="{% static "css/dh5bp/main.css" %}">
+        {% endblock %}
+        {% block modernizr %}
         <script src="{% static "js/dh5bp/vendor/modernizr-2.6.2.min.js" %}"></script>
+        {% endblock %}
         {% block head %}{% endblock %}
     </head>
     <body {{ body_attr|safe }}>
@@ -22,10 +26,11 @@
         
         {% block content %}<p>Hello world! This is HTML5 Boilerplate.</p>{% endblock %}
         
-        
+        {% block jquery %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static "js/dh5bp/vendor/jquery-1.10.2.min.js" %}"><\/script>')</script>
         <script src="{% static "js/dh5bp/plugins.js" %}"></script>
+        {% endblock %}
         
         {% block pre_main_script %}{% endblock %}
         <script src="{% if main_js %}{% static main_js %}{% else %}{% static "js/main.js" %}{% endif %}"></script>
