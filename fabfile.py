@@ -57,10 +57,15 @@ def migrateHtml():
     block_content = 'content'
     block_description = 'description'
     block_head = 'head'
+    block_jquery = 'jquery'
+    block_modernizr = 'modernizr'
+    block_normalize = 'normalizations'
     block_outdated_message = 'outdated_message'
     block_post_main_script = 'post_main_script'
     block_pre_main_script = 'pre_main_script'
     block_title = 'title'
+    
+    ind_nl = '\n        ';
 
     # create a 500 error page
     with open(e404PathSource, 'r') as f:
@@ -109,11 +114,21 @@ def migrateHtml():
             '</head>',
             '    {%% block %s %%}{%% endblock %%}\n'
             '    </head>' % block_head)
+        text = re.sub('(<link[^>]+normalize\.css)', '{%% block %s %%}%s\\1' % (
+        	block_normalize, ind_nl), text)
+        text = re.sub('(main\.css[^>]+>)', '\\1%s{%% endblock %%}%s{%% block %s %%}' % (
+        	ind_nl, ind_nl, block_modernizr), text)
+        text = re.sub('(%s-.*?<\/script>)' % block_modernizr, '\\1%s{%% endblock %%}' % 
+        	ind_nl, text)
+        text = re.sub('(<script[^>]+%s\.min\.js)' % block_jquery, 
+        	'{%% block %s %%}%s\\1' % (block_jquery, ind_nl), text)
+        text = re.sub('(plugins\.js.*?<\/script>)',
+        	'\\1%s{%% endblock %%}' % ind_nl, text)
 
 
         # make CSS and JS paths use static
-        text = re.sub('css/([^"]+)', '{% static "css/dh5bp/\\1" %}', text)
-        text = re.sub('js/([^"]+)', '{% static "js/dh5bp/\\1" %}', text)
+        text = re.sub('css/([^"]+)', "{% static 'css/dh5bp/\\1' %}", text)
+        text = re.sub('js/([^"]+)', "{% static 'js/dh5bp/\\1' %}", text)
 
         # setup a GA variable, only include script block in final page,
         #   if the code is set
@@ -121,7 +136,7 @@ def migrateHtml():
         text = text.replace(
             '<script>\n', '{%% if %s %%}<script>\n' % var_ga_code)
         text = text.replace(
-            '\n        </script>', '\n        </script>{% endif %}')
+            '%s</script>' % ind_nl, '%s</script>{%% endif %%}' % ind_nl)
 
         # create the content block
         text = text.replace('<p>', '{%% block %s %%}<p>' % block_content)
@@ -133,18 +148,18 @@ def migrateHtml():
             '{%% block %s %%}<p class="browsehappy">' % block_outdated_message)
 
         # cleanup extra lines
-        text = text.replace('\n        \n', '        \n')
-        text = text.replace('\n\n', '\n')
+        rx_empty_line_matcher = re.compile(
+            '((\s+)\n)+')
+        text = re.sub(rx_empty_line_matcher, '\n', text)
 
         # grab and remove the bottom script section
         rx_script_matcher = re.compile(
-            '(<script src="//.*main.js".*?</script>)',
-            flags=re.MULTILINE|re.DOTALL)
+            '(<script src=".*main\.js.*?<\/script>)')
         script_section = re.search(rx_script_matcher, text).group(0)
         script_in_head = re.sub(rx_script_matcher, '', text)
         replacement_text = """
         {%% block %s %%}{%% endblock %%}
-        <script src="{%% if %s %%}{%% static %s %%}{%% else %%}{%% static "js/main.js" %%}{%% endif %%}"></script>
+        <script src="{%% if %s %%}{%% static %s %%}{%% else %%}{%% static 'js/main.js' %%}{%% endif %%}"></script>
         {%% block %s %%}{%% endblock %%}""" % (
             block_pre_main_script, var_main_js, var_main_js,
             block_post_main_script)
@@ -152,12 +167,17 @@ def migrateHtml():
         script_section = '%s%s' % (
             script_section, replacement_text)
         script_section = script_section.replace(
-            '<script src="{% static "js/dh5bp/main.js" %}"></script>', '')
+            '<script src="{% static \'js/dh5bp/main.js\' %}"></script>', '')
         text = text.replace(
             '{% if DH5BP_GA_CODE %}',
-            '%s\n        {%% if DH5BP_GA_CODE %%}' % script_section)
+            '%s%s{%% if DH5BP_GA_CODE %%}' % (script_section, ind_nl))
 
         # create a copy with scripts in the head section
+        rx_jquery_matcher = re.compile(
+        	"(\n\s+{% block jquery %}.*?{% endblock %}\n)", flags=re.MULTILINE|re.DOTALL);
+        script_section = '%s%s' % (
+        	re.search(rx_jquery_matcher, script_in_head).group(0), script_section);
+        script_in_head = re.sub(rx_jquery_matcher, '',script_in_head);
         script_in_head = script_in_head.replace('</head>', """    %s
     </head>""" % script_section)
 

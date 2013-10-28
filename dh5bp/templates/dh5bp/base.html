@@ -1,39 +1,34 @@
 {% load staticfiles %}<!DOCTYPE html>
-<!--[if lt IE 7]>      <html {{ html_attr|safe }} class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html {{ html_attr|safe }} class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html {{ html_attr|safe }} class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html {{ html_attr|safe }} class="no-js"> <!--<![endif]-->
+<html {{ html_attr|safe }} class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{% block title %}{% endblock %}</title>
         <meta name="description" content="{% block description %}{% endblock %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         {% block normalizations %}
-        <link rel="stylesheet" href="{% static "css/dh5bp/normalize.css" %}">
-        <link rel="stylesheet" href="{% static "css/dh5bp/main.css" %}">
+        <link rel="stylesheet" href="{% static 'css/dh5bp/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/dh5bp/main.css' %}">
         {% endblock %}
         {% block modernizr %}
-        <script src="{% static "js/dh5bp/vendor/modernizr-2.6.2.min.js" %}"></script>
+        <script src="{% static 'js/dh5bp/vendor/modernizr-2.6.2.min.js' %}"></script>
         {% endblock %}
         {% block head %}{% endblock %}
     </head>
     <body {{ body_attr|safe }}>
-        <!--[if lt IE 7]>
+        <!--[if lt IE 8]>
             {% block outdated_message %}<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>{% endblock %}
         <![endif]-->
-        
         {% block content %}<p>Hello world! This is HTML5 Boilerplate.</p>{% endblock %}
-        
         {% block jquery %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{% static "js/dh5bp/vendor/jquery-1.10.2.min.js" %}"><\/script>')</script>
-        <script src="{% static "js/dh5bp/plugins.js" %}"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js/dh5bp/vendor/jquery-1.10.2.min.js' %}"><\/script>')</script>
+        <script src="{% static 'js/dh5bp/plugins.js' %}"></script>
         {% endblock %}
         
+        
         {% block pre_main_script %}{% endblock %}
-        <script src="{% if main_js %}{% static main_js %}{% else %}{% static "js/main.js" %}{% endif %}"></script>
+        <script src="{% if main_js %}{% static main_js %}{% else %}{% static 'js/main.js' %}{% endif %}"></script>
         {% block post_main_script %}{% endblock %}
         {% if DH5BP_GA_CODE %}<script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
