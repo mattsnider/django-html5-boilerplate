@@ -22,7 +22,7 @@
         {% endblock %}
 
         {% block pre_main_script %}{% endblock %}
-        <script src="{% if main_js %}{% static main_js %}{% else %}{% static 'js/main.js' %}{% endif %}"></script>
+        <script src="{% if main_js %}{% static main_js %}{% else %}{% static 'js/dh5bp/main.js' %}{% endif %}"></script>
         {% block post_main_script %}{% endblock %}
     </head>
     <body {{ body_attr|safe }}>
