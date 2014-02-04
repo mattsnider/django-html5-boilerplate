@@ -159,7 +159,7 @@ def migrateHtml():
         script_in_head = re.sub(rx_script_matcher, '', text)
         replacement_text = """
         {%% block %s %%}{%% endblock %%}
-        <script src="{%% if %s %%}{%% static %s %%}{%% else %%}{%% static 'js/main.js' %%}{%% endif %%}"></script>
+        <script src="{%% if %s %%}{%% static %s %%}{%% else %%}{%% static 'js/dh5bp/main.js' %%}{%% endif %%}"></script>
         {%% block %s %%}{%% endblock %%}""" % (
             block_pre_main_script, var_main_js, var_main_js,
             block_post_main_script)
