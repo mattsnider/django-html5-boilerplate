@@ -50,7 +50,6 @@ H5BP Template
 Any template you want to inherit the H5BP page architecture include the following:
 
     {% extends 'dh5bp/base.html' %}
-    {% load url from future %}
     {% load staticfiles %}
     {% block title %}YOUR TITLE HERE{% endblock %}
     {% block content %}YOUR PAGE MARKUP HERE{% endblock %}
@@ -58,7 +57,6 @@ Any template you want to inherit the H5BP page architecture include the followin
 I've added a second template that puts all the JavaScript includes in the `head` tag. I don't recommend using this, unless you are using a mobile library like jQuery Mobile, which expects to be loaded before the body.
 
     {% extends 'dh5bp/base_script_in_head.html' %}
-    {% load url from future %}
     {% load staticfiles %}
     {% block title %}YOUR TITLE HERE{% endblock %}
     {% block content %}YOUR PAGE MARKUP HERE{% endblock %}
